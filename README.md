@@ -1,6 +1,6 @@
 # CMUSphinxDict
 
-Wrapper for [CMU Sphinx Pronouncing Dictionary](http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/sphinxdict/)
+Wrapper for [CMU Sphinx Pronouncing Dictionary](http://svn.code.sf.net/p/cmusphinx/code/trunk/cmudict/sphinxdict/).
 
 # Install
 
