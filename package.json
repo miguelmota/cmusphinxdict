@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/miguelmota/cmusphinxdict"
+    "url": "https://github.com/miguelmota/node-cmusphinxdict"
   },
   "keywords": [
     "CMU",
@@ -25,9 +25,9 @@
   "author": "Miguel Mota <hello@miguelmota.com> (http://www.miguelmota.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/miguelmota/cmusphinxdict/issues"
+    "url": "https://github.com/miguelmota/node-cmusphinxdict/issues"
   },
-  "homepage": "https://github.com/miguelmota/cmusphinxdict",
+  "homepage": "https://github.com/miguelmota/node-cmusphinxdict",
   "dependencies": {
     "tape": "^3.0.3"
   }
