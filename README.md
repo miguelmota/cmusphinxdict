@@ -37,8 +37,8 @@ CMUSphinxDict.getAll('hello', function(word, pronouncings) {
 Special character lookup
 
 ```
-var dotPronouncings = CMUSphinxDict.getAll('.');
-console.log(dotPronouncings); // [ 'D EH S AH M AH L', 'D AA T', 'P IH R IY AH D', 'P OY N T' ]
+var pronouncings = CMUSphinxDict.getAll('.');
+console.log(pronouncings); // [ 'D EH S AH M AH L', 'D AA T', 'P IH R IY AH D', 'P OY N T' ]
 ```
 
 # License
