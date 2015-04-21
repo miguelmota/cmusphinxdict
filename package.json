@@ -1,8 +1,11 @@
 {
   "name": "cmusphinxdict",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Wrapper for CMU Sphinx Pronouncing Dictionary",
   "main": "cmusphinxdict.js",
+  "bin": {
+    "cmusphinxdict": "bin/cmusphinxdict.js"
+  },
   "directories": {
     "test": "test"
   },

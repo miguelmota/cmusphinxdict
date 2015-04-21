@@ -56,5 +56,14 @@ CMUDict.prototype.getAll = function(word, callback) {
   return results;
 };
 
+var cmudict = new CMUDict();
 
-module.exports = new CMUDict();
+var args = process.argv;
+
+if (args.length > 2) {
+  var word = args[2];
+  var results = cmudict.getAll(word);
+  process.stdout.write(JSON.stringify(results, null, 2) + '\n');
+}
+
+module.exports = cmudict;

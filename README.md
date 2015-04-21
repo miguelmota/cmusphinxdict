@@ -36,9 +36,19 @@ CMUSphinxDict.getAll('hello', function(word, pronouncings) {
 
 Special character lookup
 
-```
+```javascript
 var pronouncings = CMUSphinxDict.getAll('.');
 console.log(pronouncings); // [ 'D EH S AH M AH L', 'D AA T', 'P IH R IY AH D', 'P OY N T' ]
+```
+
+Command line
+
+```javascript
+$ cmusphinxdict hello
+[
+  "HH AH L OW",
+  "HH EH L OW"
+]
 ```
 
 # License
