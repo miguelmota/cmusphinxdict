@@ -11,18 +11,6 @@ npm install cmusphinxdict
 # Usage
 
 ```javascript
-var CMUSphinxDict = require('../cmusphinxdict');
-
-var pronouncing = CMUSphinxDict.get('hello');
-console.log(pronouncing); // 'HH AH L OW'
-
-var pronouncings = CMUSphinxDict.getAll('hello');
-console.log(pronouncings); // ['HH AH L OW', 'HH EH L OW']
-```
-
-Callback style
-
-```javascript
 CMUSphinxDict.get('hello', function(word, pronouncing) {
   console.log(word); // 'HELLO'
   console.log(pronouncing); // 'HH AH L OW'
