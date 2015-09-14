@@ -25,8 +25,10 @@ CMUDict.prototype._findMatch = function(word) {
   };
 
   var match = cmusphinxdict[word];
-  if (!match && specialSymbols[word[0]].length) {
-    specialSymbols[word[0]].forEach(function(w) {
+  var specialSymbolsWord = specialSymbols[word[0]];
+
+  if (!match && Array.isArray(specialSymbolsWord)) {
+    specialSymbolsWord.forEach(function(w) {
       match = match || [];
       var m = cmusphinxdict[w];
       if (m) {
@@ -34,20 +36,11 @@ CMUDict.prototype._findMatch = function(word) {
       }
     });
   }
+
   return match;
 };
 
 CMUDict.prototype.get = function(word, callback) {
-  word = (word || '').toUpperCase();
-  var match = this._findMatch(word);
-  var result = (match && match.length) ? match[0] : null;
-  if (typeof callback === 'function') {
-    callback(word, result);
-  }
-  return result;
-};
-
-CMUDict.prototype.getAll = function(word, callback) {
   word = (word || '').toUpperCase();
   var results = this._findMatch(word) || [];
   if (typeof callback === 'function') {
@@ -62,7 +55,7 @@ var args = process.argv;
 
 if (args.length > 2) {
   var word = args[2];
-  var results = cmudict.getAll(word);
+  var results = cmudict.get(word);
   process.stdout.write(JSON.stringify(results, null, 2) + '\n');
 }
 

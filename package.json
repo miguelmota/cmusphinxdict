@@ -1,6 +1,6 @@
 {
   "name": "cmusphinxdict",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Wrapper for CMU Sphinx Pronouncing Dictionary",
   "main": "cmusphinxdict.js",
   "bin": {
@@ -33,5 +33,8 @@
   "homepage": "https://github.com/miguelmota/node-cmusphinxdict",
   "dependencies": {
     "tape": "^3.0.3"
+  },
+  "devDependencies": {
+    "tape": "^3.5.0"
   }
 }

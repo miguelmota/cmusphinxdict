@@ -11,12 +11,7 @@ npm install cmusphinxdict
 # Usage
 
 ```javascript
-CMUSphinxDict.get('hello', function(word, pronouncing) {
-  console.log(word); // 'HELLO'
-  console.log(pronouncing); // 'HH AH L OW'
-});
-
-CMUSphinxDict.getAll('hello', function(word, pronouncings) {
+CMUSphinxDict.get('hello', function(word, pronouncings) {
   console.log(word); // 'HELLO'
   console.log(pronouncings); // ['HH AH L OW', 'HH EH L OW']
 });
@@ -25,8 +20,10 @@ CMUSphinxDict.getAll('hello', function(word, pronouncings) {
 Special character lookup
 
 ```javascript
-var pronouncings = CMUSphinxDict.getAll('.');
-console.log(pronouncings); // [ 'D EH S AH M AH L', 'D AA T', 'P IH R IY AH D', 'P OY N T' ]
+CMUSphinxDict.get('.', function(word, pronouncings) {
+  console.log(word); // '.'
+  console.log(pronouncings); // [ 'D EH S AH M AH L', 'D AA T', 'P IH R IY AH D', 'P OY N T' ]
+});
 ```
 
 Command line
