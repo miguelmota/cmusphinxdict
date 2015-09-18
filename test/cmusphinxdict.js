@@ -2,7 +2,7 @@ var test = require('tape');
 var cmudict = require('../cmusphinxdict');
 
 test('dict', function (t) {
-  t.plan(8);
+  t.plan(10);
 
   cmudict.get('hello', function(word, pronouncings) {
     t.equal(word, 'HELLO');
@@ -22,6 +22,11 @@ test('dict', function (t) {
   cmudict.get(['hello', 'world'], function(words, pronouncings) {
     t.deepEqual(words, ['HELLO', 'WORLD']);
     t.deepEqual(pronouncings, [['HH AH L OW', 'HH EH L OW'], ['W ER L D']]);
+  });
+
+  cmudict.get(['hello', 'idontexist', 'world'], function(words, pronouncings) {
+    t.deepEqual(words, ['HELLO', 'IDONTEXIST', 'WORLD']);
+    t.deepEqual(pronouncings, [['HH AH L OW', 'HH EH L OW'], [], ['W ER L D']]);
   });
 
 });
