@@ -10,10 +10,21 @@ npm install cmusphinxdict
 
 # Usage
 
+Single word
+
 ```javascript
 CMUSphinxDict.get('hello', function(word, pronouncings) {
   console.log(word); // 'HELLO'
   console.log(pronouncings); // ['HH AH L OW', 'HH EH L OW']
+});
+```
+
+Multiple words
+
+```javascript
+CMUSphinxDict.get(['hello', 'world'], function(words, pronouncings) {
+  console.log(words); // ['HELLO', 'WORLD']
+  console.log(pronouncings); // [['HH AH L OW', 'HH EH L OW'], ['W ER L D']]
 });
 ```
 

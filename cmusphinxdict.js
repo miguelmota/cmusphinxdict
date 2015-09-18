@@ -4,7 +4,7 @@ function CMUDict() {
 
 }
 
-CMUDict.prototype._findMatch = function(word) {
+CMUDict._findMatch = function(word) {
   var specialSymbols = {
     '!': ['EXCLAMATION-POINT'],
     '"': ['CLOSE-QUOTE','DOUBLE-QUOTE','END-OF-QUOTE','END-QUOTE','IN-QUOTES','QUOTE','UNQUOTE'],
@@ -40,23 +40,42 @@ CMUDict.prototype._findMatch = function(word) {
   return match;
 };
 
-CMUDict.prototype.get = function(word, callback) {
-  word = (word || '').toUpperCase();
-  var results = this._findMatch(word) || [];
+CMUDict.get = function get(word, callback) {
+  if (Array.isArray(word)) {
+    var a = [];
+    var b = [];
+    var c = word.length;
+    word.forEach(function(wd) {
+      get(wd, function(w, p) {
+        a.push(w);
+        b.push(p);
+        if (c-- === 1) {
+          callback(a, b);
+        }
+      });
+    });
+
+    return undefined;
+  }
+
+  if (typeof word !== 'string') {
+    word = '';
+  }
+
+  word = word.toUpperCase();
+  var results = CMUDict._findMatch(word) || [];
   if (typeof callback === 'function') {
     callback(word, results);
   }
   return results;
 };
 
-var cmudict = new CMUDict();
-
 var args = process.argv;
 
-if (args.length > 2) {
+if (args.length > 29) {
   var word = args[2];
-  var results = cmudict.get(word);
+  var results = CMUDict.get(word);
   process.stdout.write(JSON.stringify(results, null, 2) + '\n');
 }
 
-module.exports = cmudict;
+module.exports = CMUDict;
