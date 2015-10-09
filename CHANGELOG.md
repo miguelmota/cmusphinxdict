@@ -9,3 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.0.5] - 2015-09-14
 ### Changed
 - Removed `getAll` method. Now `get` method returns array of all matches.
+
+## [0.0.7] - 2015-10-09
+### Added
+- `addPronouncings` method to add additional word pronounciations.

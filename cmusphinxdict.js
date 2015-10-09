@@ -4,7 +4,7 @@ function CMUDict() {
 
 }
 
-CMUDict._findMatch = function(word) {
+CMUDict._findMatch = function _findMatch(word) {
   var specialSymbols = {
     '!': ['EXCLAMATION-POINT'],
     '"': ['CLOSE-QUOTE','DOUBLE-QUOTE','END-OF-QUOTE','END-QUOTE','IN-QUOTES','QUOTE','UNQUOTE'],
@@ -40,6 +40,22 @@ CMUDict._findMatch = function(word) {
   return match;
 };
 
+CMUDict._unique = function _unique(array) {
+  var unique = [];
+
+  if (!Array.isArray(array)) {
+    return unique;
+  }
+
+  array.forEach(function(value) {
+    if (unique.indexOf(value) === -1) {
+      unique.push(value);
+    }
+  });
+
+  return unique;
+};
+
 CMUDict.get = function get(word, callback) {
   if (Array.isArray(word)) {
     var a = [];
@@ -64,10 +80,67 @@ CMUDict.get = function get(word, callback) {
 
   word = word.toUpperCase();
   var results = CMUDict._findMatch(word) || [];
+
   if (typeof callback === 'function') {
     callback(word, results);
   }
+
   return results;
+};
+
+CMUDict.addPronouncings = function addPronouncings(stream, callback) {
+  var data = '';
+
+  stream.on('data', function(chunk) {
+    data += chunk;
+  }).on('error', function(error) {
+    callback(error);
+  }).on('end', function() {
+    var json;
+
+    try {
+      json = JSON.parse(data);
+    } catch(error) {
+      callback(error);
+    }
+
+    if (json) {
+      if (Array.isArray(json)) {
+        var words = [];
+
+        json.forEach(function(obj) {
+          for (var word in obj) {
+            if (obj.hasOwnProperty(word)) {
+              if (typeof word !== 'string') {
+                return false;
+              }
+
+              word = word.toUpperCase();
+
+              var newPronouncings = obj[word];
+              var currentPronouncings = cmusphinxdict[word];
+
+              if ((typeof newPronouncings === 'string' || Array.isArray(newPronouncings))) {
+                if (Array.isArray(currentPronouncings)) {
+                  currentPronouncings = currentPronouncings.concat(newPronouncings);
+                } else {
+                  currentPronouncings = newPronouncings;
+                }
+              }
+
+              cmusphinxdict[word] = CMUDict._unique(currentPronouncings);
+
+              words.push(word);
+            }
+          }
+        });
+
+        this.get(words, function(words, pronouncings) {
+          callback(null, words, pronouncings);
+        });
+      }
+    }
+  }.bind(this));
 };
 
 var args = process.argv;

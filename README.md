@@ -37,6 +37,29 @@ CMUSphinxDict.get('.', function(word, pronouncings) {
 });
 ```
 
+Add additional pronouncings
+
+`additionalPronouncings.json`
+
+```json
+[
+  {
+    "AMALTHEA": [
+      "AH M AA L TH IY AH"
+    ]
+  }
+]
+```
+
+```javascript
+var file = fs.createReadStream(__dirname + '/additionalPronouncings.json');
+
+CMUSphinxDict.addPronouncings(file, function(error, words, pronouncings) {
+  console.log(words); // ['AMALTHEA']
+  console.log(pronouncings); // [['AH M AA L TH IY AH']]
+});
+```
+
 Command line
 
 ```javascript
