@@ -1,8 +1,15 @@
+var stream = require('stream');
 var cmusphinxdict = require('./lib/cmusphinxdict.json');
 
 function CMUDict() {
 
 }
+
+CMUDict._isReadableStream = function _isReadableStream(obj) {
+  return (obj instanceof stream.Stream &&
+          typeof obj._read === 'function' &&
+          typeof obj._readableState === 'object');
+};
 
 CMUDict._findMatch = function _findMatch(word) {
   var specialSymbols = {
@@ -90,6 +97,11 @@ CMUDict.get = function get(word, callback) {
 
 CMUDict.addPronouncings = function addPronouncings(stream, callback) {
   var data = '';
+
+  if (!CMUDict._isReadableStream(stream)) {
+    callback(new TypeError('Must use a Readable Stream.'));
+    return false;
+  }
 
   stream.on('data', function(chunk) {
     data += chunk;
