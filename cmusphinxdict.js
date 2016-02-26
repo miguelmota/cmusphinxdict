@@ -1,3 +1,5 @@
+'use strict';
+
 var stream = require('stream');
 var cmusphinxdict = require('./lib/cmusphinxdict.json');
 
@@ -154,13 +156,5 @@ CMUDict.addPronouncings = function addPronouncings(stream, callback) {
     }
   }.bind(this));
 };
-
-var args = process.argv;
-
-if (args.length > 29) {
-  var word = args[2];
-  var results = CMUDict.get(word);
-  process.stdout.write(JSON.stringify(results, null, 2) + '\n');
-}
 
 module.exports = CMUDict;

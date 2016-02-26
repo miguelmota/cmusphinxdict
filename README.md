@@ -63,12 +63,32 @@ CMUSphinxDict.addPronouncings(file, function(error, words, pronouncings) {
 Command line
 
 ```javascript
-$ cmusphinxdict hello
-[
-  "HH AH L OW",
-  "HH EH L OW"
-]
+$ cmusphinxdict hello world
+
+HELLO HH AH L OW
+HELLO(2) HH EH L OW
+WORLD W ER L D
 ```
+
+JSON format:
+
+```javascript
+$ cmusphinxdict hello world --format=json
+
+{
+  "HELLO": [
+    "HH AH L OW",
+    "HH EH L OW"
+  ],
+  "WORLD": [
+    "W ER L D"
+  ]
+}
+```
+
+Aliases for format: `-f=[type]`, `--format=[type]`, `--json`
+
+Format types: `json`, `text` (default)
 
 # License
 
