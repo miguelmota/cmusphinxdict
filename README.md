@@ -86,7 +86,7 @@ $ cmusphinxdict hello world --format=json
 }
 ```
 
-Aliases for format: `-f=[type]`, `--format=[type]`, `--json`
+Aliases for *format*: `-f=[type]`, `--format=[type]`, `--json`
 
 Format types: `json`, `text` (default)
 
