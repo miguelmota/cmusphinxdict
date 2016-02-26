@@ -60,7 +60,7 @@ CMUSphinxDict.addPronouncings(file, function(error, words, pronouncings) {
 });
 ```
 
-Command line
+## Command line
 
 ```javascript
 $ cmusphinxdict hello world
